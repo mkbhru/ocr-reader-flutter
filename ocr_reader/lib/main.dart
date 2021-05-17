@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       list = await FlutterMobileVision.read(
         waitTap: true,
-        fps: 5.0,
+        fps: 15.0,
       );
       for (OcrText text in list) {
         print('valueis ${text.value}');

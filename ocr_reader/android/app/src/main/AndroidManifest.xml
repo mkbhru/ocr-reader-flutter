@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ocr_reader">
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <uses-features android:name="android.hardware.camera"></uses-features>
+    <!-- <uses-features android:name="android.hardware.camera"></uses-features> -->
    <application
         android:label="ocr_reader"
         android:icon="@mipmap/ic_launcher">
