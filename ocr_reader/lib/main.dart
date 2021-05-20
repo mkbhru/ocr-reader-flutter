@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hackathon App',
       theme: ThemeData(
-
         primarySwatch: Colors.purple,
       ),
       home: MyHomePage(title: 'OCR & Barcode Reader'),
@@ -31,6 +30,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isInitial = false;
+  // List<String> data = [
+  //   "hello",
+  // ];
+  String name = "Your selected Text Will Appear here :)";
 
   void _scanBarcode() async {
     List<Barcode> barcodes = [];
@@ -43,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
         for (Barcode barcode in barcodes) {
           print(
               'barcodevalueis ${barcode.displayValue} ${barcode.getFormatString()} ${barcode.getValueFormatString()}');
+          setState(() {
+            name = barcode.displayValue;
+          });
         }
       }
     } catch (e) {
@@ -72,10 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
       );
       for (OcrText text in list) {
         print('valueis ${text.value}');
+        setState(() {
+          name = text.value;
+        });
+        // data.add(text.value);
       }
     } catch (e) {}
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -92,26 +101,28 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 'Welcome To OCR Reader',
                 style: TextStyle(fontSize: 30),
-
               ),
-              //         floatingActionButton: FloatingActionButton(
-              //   onPressed: _startScan,
-              //   tooltip: 'Increment',
-              //   child: Icon(Icons.find_in_page),
-              // ),
               ElevatedButton(
                 onPressed: _startScan,
                 child: Icon(Icons.find_in_page),
               ),
-              // floatingActionButton: FloatingActionButton(
-              //   onPressed: _scanBarcode,
-              //   tooltip: 'Increment',
-              //   child: Icon(Icons.find_in_page),
-              // ),
               ElevatedButton(
                 onPressed: _scanBarcode,
                 child: Icon(Icons.edit),
-              )
+              ),
+              SizedBox(
+                height: 10,
+                width: 10,
+              ),
+              SelectableText(
+                name,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              // ListView(
+              //   children: [Text(data.first)],
+              // )
             ],
           ),
         ),
