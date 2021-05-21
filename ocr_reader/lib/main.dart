@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MyHomePage(title: 'OCR & Barcode Reader'),
+      home: MyHomePage(title: 'All-In-One Reader'),
     );
   }
 }
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       barcodes = await FlutterMobileVision.scan(
         waitTap: true,
-        showText: true,
+        // showText: true,
       );
       if (barcodes.length > 0) {
         for (Barcode barcode in barcodes) {
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       list = await FlutterMobileVision.read(
         waitTap: true,
-        fps: 10.0,
+        fps: 5.0,
       );
       for (OcrText text in list) {
         print('valueis ${text.value}');
@@ -92,40 +92,104 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Card(
-        color: Colors.grey[350],
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Welcome To OCR Reader',
-                style: TextStyle(fontSize: 30),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
-              ElevatedButton(
-                onPressed: _startScan,
-                child: Icon(Icons.find_in_page),
-              ),
-              ElevatedButton(
-                onPressed: _scanBarcode,
-                child: Icon(Icons.edit),
-              ),
-              SizedBox(
-                height: 10,
-                width: 10,
-              ),
-              SelectableText(
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "OCR Reader ->",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: ElevatedButton(
+                      onPressed: _startScan,
+                      child: Icon(Icons.find_in_page),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "QR & Barcode Scanner ->",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: ElevatedButton(
+                      onPressed: _scanBarcode,
+                      child: Icon(Icons.qr_code),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+            width: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.rectangle,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.0,
+                )),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SelectableText(
                 name,
                 style: TextStyle(
                   fontSize: 20,
+                  color: Colors.white,
                 ),
               ),
-              // ListView(
-              //   children: [Text(data.first)],
-              // )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text("Long Press to copy :)"),
+          ),
+          //         onTap: () {
+          // Clipboard.setData(ClipboardData(text: name));
+// },
+
+          // ListView(
+          //   children: [Text(data.first)],
+          // )
+        ],
       ),
 
       // floatingActionButton: FloatingActionButton(
