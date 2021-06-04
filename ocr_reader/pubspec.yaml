@@ -44,6 +44,8 @@ dependencies:
 #   image_path: "assets/icon.jpg"
 
 dev_dependencies:
+  change_app_package_name: ^0.1.3
+
   flutter_test:
     sdk: flutter
 

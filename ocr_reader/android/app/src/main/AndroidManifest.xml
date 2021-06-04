@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ocr_reader">
+    package="com.example.AIO_Reader">
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
 <!--     <uses-features android:name="android.hardware.camera"></uses-features>-->
    <application
